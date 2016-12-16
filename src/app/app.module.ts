@@ -4,17 +4,40 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import {firebaseConfig} from "../environments/firebase.config";
+import {AngularFireModule} from "angularfire2/index";
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+
+
+import { HomeComponent } from './home/home.component';
+import {LessonsService} from './shared/model/lessons.service';
+import { LessonsListComponent } from './lessons-list/lessons-list.component';
+import {RouterModule} from '@angular/router';
+import {routerConfig} from "./router.config";
+import { TopMenuComponent } from './top-menu/top-menu.component';
+import { CoursesComponent } from './courses/courses.component';
+import{CoursesService} from  './shared/model/courses.service';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LessonsListComponent,
+    TopMenuComponent,
+    CoursesComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    RouterModule.forRoot(routerConfig)
   ],
-  providers: [],
+  providers: [LessonsService,CoursesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
